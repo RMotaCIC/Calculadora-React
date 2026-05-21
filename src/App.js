@@ -3,8 +3,26 @@ import freeCodeCampLogo from './img/freecodecamp-logo.png';
 import Boton from './components/Boton.js';
 import Pantalla from './components/Pantalla.js';
 import BotonClear from './components/BotonClear.js';
+import { useState } from 'react';
+import { evaluate } from 'mathjs';
 
 function App() {
+
+  const [input, setInput] = useState('');
+
+  // Función que usamos para trabajar con el estado del componente que deseamos manipular
+  const agregarInput = valor => {
+    setInput(input + valor);
+  };
+
+  const calcularResultado = () => {
+    if (input) {
+      setInput(evaluate(input));
+    } else {
+      alert("Por favor ingrese valores para poder realizar los cálculos.");
+    }
+  };
+
   return (
     <div className= 'App'>
       
@@ -16,38 +34,39 @@ function App() {
       </div>
 
       <div className='contenedor-calculadora'>
-        <Pantalla />
+        <Pantalla input={input} />
         <div className='fila'>
           {/* Props children */}
-          <Boton>1</Boton>
-          <Boton>2</Boton>
-          <Boton>3</Boton>
-          <Boton>+</Boton>
+          <Boton manejarClick={agregarInput}>1</Boton>
+          <Boton manejarClick={agregarInput}>2</Boton>
+          <Boton manejarClick={agregarInput}>3</Boton>
+          <Boton manejarClick={agregarInput}>+</Boton>
         </div>
 
         <div className='fila'>
-          <Boton>4</Boton>
-          <Boton>5</Boton>
-          <Boton>6</Boton>
-          <Boton>-</Boton>
+          <Boton manejarClick={agregarInput}>4</Boton>
+          <Boton manejarClick={agregarInput}>5</Boton>
+          <Boton manejarClick={agregarInput}>6</Boton>
+          <Boton manejarClick={agregarInput}>-</Boton>
         </div>
 
         <div className='fila'>
-          <Boton>7</Boton>
-          <Boton>8</Boton>
-          <Boton>9</Boton>
-          <Boton>*</Boton>
+          <Boton manejarClick={agregarInput}>7</Boton>
+          <Boton manejarClick={agregarInput}>8</Boton>
+          <Boton manejarClick={agregarInput}>9</Boton>
+          <Boton manejarClick={agregarInput}>*</Boton>
         </div>
 
         <div className='fila'>
-          <Boton>=</Boton>
-          <Boton>0</Boton>
-          <Boton>.</Boton>
-          <Boton>/</Boton>
+          <Boton manejarClick={calcularResultado}>=</Boton>
+          <Boton manejarClick={agregarInput}>0</Boton>
+          <Boton manejarClick={agregarInput}>.</Boton>
+          <Boton manejarClick={agregarInput}>/</Boton>
         </div>
 
         <div className='fila'>
-          <BotonClear>Clear</BotonClear>
+          {/* Otra forma de asignar funciones que trabajen con los Hooks ("useState") es de la siguiente forma: declarándola como una función anónima dentro de las propiedades del componente. */}
+          <BotonClear manejarClear={() => setInput('')}>Clear</BotonClear>
         </div>
       </div>
 
