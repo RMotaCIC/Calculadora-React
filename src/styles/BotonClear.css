@@ -12,6 +12,7 @@
   border: 2px solid white;
   cursor: pointer;
   border-radius: 45px;
+  /* Este atributo sirve para que los usuarios no puedan seleccionar el texto */
   user-select: none;
 }
 

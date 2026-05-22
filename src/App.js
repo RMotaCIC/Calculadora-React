@@ -3,11 +3,13 @@ import freeCodeCampLogo from './img/freecodecamp-logo.png';
 import Boton from './components/Boton.js';
 import Pantalla from './components/Pantalla.js';
 import BotonClear from './components/BotonClear.js';
+// Importamos el hook useState
 import { useState } from 'react';
+// Importamos la librería 'mathjs' para poder usar la función "evaluate()" 
 import { evaluate } from 'mathjs';
 
 function App() {
-
+  // Usamos el hook con la variable 'input' y la función 'setInput'. El estado inicial de la varibale 'input' lo declaramos con un string vacío.
   const [input, setInput] = useState('');
 
   // Función que usamos para trabajar con el estado del componente que deseamos manipular
@@ -15,13 +17,14 @@ function App() {
     setInput(input + valor);
   };
 
-  const calcularResultado = () => {
+  // Esta función calcula el resultado mediante condicionales. Si el input es true (si hay valores en la pantalla) usará la función "evaluate()" para hacer las operaciones de lugar, si no, y la pantalla está vacía, manda un "alert()" pidiendo al usuario que ingrese un valor.
+  function calcularResultado() {
     if (input) {
       setInput(evaluate(input));
     } else {
       alert("Por favor ingrese valores para poder realizar los cálculos.");
     }
-  };
+  }
 
   return (
     <div className= 'App'>
